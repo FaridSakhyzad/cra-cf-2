@@ -6,14 +6,24 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "clean-webpack-plugin": "^4.0.0",
     "express": "^4.19.2",
+    "interpolate-html-plugin": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4"
+    "url-loader": "^4.1.1",
+    "web-vitals": "^2.1.4",
+    "webpack-node-externals": "^3.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "npm run clean-build-folders && npm run build-client && npm run build-server && npm run run-server",
+    "build-client": "npm run build",
+    "build-server": "webpack --config ./webpack.server.js",
+    "run-server": "nodemon ./build-server/bundle.js",
+    "clean-build-folders": "rm -rf ./build/ && rm -rf ./build-server/ && rm -rf ./dist/",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -35,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
   }
 }

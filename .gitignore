@@ -21,3 +21,11 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/.gitignore
+/.idea/cra-2.iml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/build-server/bundle.js
+/build-server/bundle.js.LICENSE.txt
