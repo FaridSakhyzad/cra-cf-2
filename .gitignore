@@ -27,5 +27,5 @@ yarn-error.log*
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/vcs.xml
-/build-server/bundle.js
-/build-server/bundle.js.LICENSE.txt
+/build/
+/build-server/

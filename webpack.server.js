@@ -20,6 +20,9 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
+        resolve: {
+          extensions: [".js", ".jsx"]
+        },
         use: {
           loader: 'babel-loader',
           options: {
@@ -43,12 +46,23 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
+        test: /\.(png|jpg|jpeg|gif)$/,
         loader: 'url-loader',
         options: {
-          limit: 8192,
-          name: '[name].[ext]',
-          outputPath: 'images'
+          limit: parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'),
+          name: '[name].[hash:20].[ext]',
+          outputPath: '../build/static/media',
+          publicPath: '/static/media'
+        }
+      },
+      {
+        test: /\.(svg)$/,
+        loader: 'url-loader',
+        options: {
+          limit: parseInt(process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'),
+          name: '[name].[hash].[ext]',
+          outputPath: '../build/static/media',
+          publicPath: '/static/media'
         }
       }
     ]
