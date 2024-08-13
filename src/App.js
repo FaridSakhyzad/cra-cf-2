@@ -1,13 +1,18 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Element1 from './components/Element1/index';
-import Element2 from './components/Element2/index';
+
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import About from "./pages/About";
+import Faq from "./pages/Faq";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Element1 />} />
-      <Route path="/asdf" element={<Element2 />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/faq" element={<Faq />} />
     </Routes>
   );
 }

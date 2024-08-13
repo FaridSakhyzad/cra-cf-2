@@ -1,7 +1,7 @@
 import './style.scss';
-import logo from "../../logo.svg";
+import logo from '../../logo.svg';
 
-export default function Element1 () {
+export default function Element2 () {
   return (
     <>
       <h1>ELEMENT 2</h1>
