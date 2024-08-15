@@ -2,10 +2,10 @@ import './App.css';
 import { Routes, Route, } from 'react-router-dom';
 import React, { Suspense } from 'react';
 
-const Home = React.lazy(() => import('./pages/Home'));
-const Profile = React.lazy(() => import('./pages/Profile'));
-const About = React.lazy(() => import('./pages/About'));
-const Faq = React.lazy(() => import('./pages/Faq'));
+const Home = React.lazy(() => import('./pages/Home' /* webpackPrefetch: true */));
+const Profile = React.lazy(() => import('./pages/Profile' /* webpackPrefetch: true */));
+const About = React.lazy(() => import('./pages/About' /* webpackPrefetch: true */));
+const Faq = React.lazy(() => import('./pages/Faq' /* webpackPrefetch: true */));
 
 function App() {
   return (

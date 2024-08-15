@@ -2,7 +2,7 @@ import fs from 'fs';
 import React from 'react';
 import express from 'express';
 
-import { renderToString } from 'react-dom/server';
+import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from "react-router-dom/server";
 import App from '../App';
 
@@ -12,22 +12,33 @@ const server = express();
 
 server.use(express.static('build', { index: false }));
 
-server.use('/', (req, res) => {
+server.get('*', (req, res) => {
   const frame = fs.readFileSync('./build/index.html', { encoding: 'utf8', flag: 'r' });
 
-  const data = renderToString(
-    <React.StrictMode>
-      <StaticRouter location={req.url} context={{}}>
-        <App />
-      </StaticRouter>
-    </React.StrictMode>
+  let hasError = false;
+
+  const stream = renderToPipeableStream(
+    <StaticRouter location={req.url}>
+      <App/>
+    </StaticRouter>,
+    {
+      onAllReady() {
+        res.setHeader('Content-type', 'text/html');
+        res.write(frame.replace('<div id="root"></div></body></html>', '<div id="root">'));
+
+        stream.pipe(res, { end: false });
+
+        res.write('</div></body></html>');
+        res.end();
+      },
+      onError(error) {
+        hasError = true;
+        console.error(error);
+      }
+    }
   );
-
-  const response = frame.replace('<div id="root"></div>', `<div id="root">${data}</div>`)
-
-  res.send(response);
 });
 
 server.listen(PORT, () => {
-  console.log(`CRA 2 is Running on http://localhost: ${PORT}/`);
+  console.log(`App is Running on http://localhost: ${PORT}/`);
 });
