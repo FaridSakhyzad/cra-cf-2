@@ -14,6 +14,10 @@ module.exports = {
     path: path.resolve(__dirname, 'build-server'),
     publicPath: '/'
   },
+  resolve: {
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    extensions: ['.js', '.jsx', '.json'],
+  },
   externals: [nodeExternals()],
   module: {
     rules: [

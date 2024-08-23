@@ -5,6 +5,8 @@ import express from 'express';
 import { renderToPipeableStream } from 'react-dom/server';
 import { StaticRouter } from "react-router-dom/server";
 import App from '../App';
+import { configureStore } from '@reduxjs/toolkit';
+import { reducer } from '../store';
 
 const PORT = process.env.PORT || 3024;
 
@@ -17,6 +19,12 @@ server.get('*', (req, res) => {
 
   let hasError = false;
 
+  const store = configureStore({
+    reducer,
+  });
+
+  const preloadedState = store.getState();
+
   const stream = renderToPipeableStream(
     <StaticRouter location={req.url}>
       <App/>
@@ -26,9 +34,20 @@ server.get('*', (req, res) => {
         res.setHeader('Content-type', 'text/html');
         res.write(frame.replace('<div id="root"></div></body></html>', '<div id="root">'));
 
-        stream.pipe(res, { end: false });
+        stream.pipe(res, {end: false});
 
-        res.write('</div></body></html>');
+        const preloadedStateTemplate = `
+          <script id="preloaded-state">
+            // WARNING: See the following for security issues around embedding JSON in HTML:
+            // https://redux.js.org/usage/server-rendering#security-considerations
+            window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+            /</g,
+            '\\u003c'
+          )}
+          </script>
+        `;
+
+        res.write(`</div>${preloadedStateTemplate}</body></html>`);
         res.end();
       },
       onError(error) {
