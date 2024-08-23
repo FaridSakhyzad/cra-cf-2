@@ -20,8 +20,12 @@ const store = configureStore({
 if (typeof window !== 'undefined') {
   delete window.__PRELOADED_STATE__;
 
-  document.querySelector('#preloaded-state').remove();
-};
+  window.addEventListener('load', () => {
+    const $preloadedState = document.querySelector('#preloaded-state');
+
+    $preloadedState && $preloadedState.remove();
+  });
+}
 
 function App() {
   return (
