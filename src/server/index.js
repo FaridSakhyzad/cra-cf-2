@@ -1,11 +1,11 @@
 import fs from 'fs';
 import React from 'react';
-import express from 'express';
-
-import { renderToPipeableStream } from 'react-dom/server';
-import { StaticRouter } from "react-router-dom/server";
-import App from '../App';
 import { configureStore } from '@reduxjs/toolkit';
+import express from 'express';
+import { renderToPipeableStream } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+
+import App from '../App';
 import { reducer } from '../store';
 
 const PORT = process.env.PORT || 3024;
@@ -38,12 +38,11 @@ server.get('*', (req, res) => {
 
         const preloadedStateTemplate = `
           <script id="preloaded-state">
-            // WARNING: See the following for security issues around embedding JSON in HTML:
-            // https://redux.js.org/usage/server-rendering#security-considerations
             window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
             /</g,
             '\\u003c'
           )}
+            window.isServerRendered = true;
           </script>
         `;
 
