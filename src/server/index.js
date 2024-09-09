@@ -15,7 +15,27 @@ const server = express();
 server.use(express.static('build', { index: false }));
 
 server.get('*', (req, res) => {
-  const frame = fs.readFileSync('./build/index.html', { encoding: 'utf8', flag: 'r' });
+  let frame = fs.readFileSync('./build/index.html', { encoding: 'utf8', flag: 'r' });
+  const manifestFile = fs.readFileSync('./build/asset-manifest.json', { encoding: 'utf8', flag: 'r' });
+  const manifest = JSON.parse(manifestFile);
+
+  console.log('manifest', manifest.files);
+
+  const cssChunkAddresses = Object.keys(manifest.files).filter((fileName) => {
+    return fileName !== 'main.css' && fileName.match(/\.css$/ig);
+  });
+
+  const cssChunks = [];
+
+  for (let i = 0; i < cssChunkAddresses.length; i++) {
+    console.log(cssChunkAddresses[i], ' --- ' , manifest.files[cssChunkAddresses[i]]);
+
+    const template = `<link href="${manifest.files[cssChunkAddresses[i]]}" rel="stylesheet">`;
+
+    cssChunks.push(template);
+  }
+
+  console.log('cssChunks', cssChunks.join('\n'));
 
   let hasError = false;
 
@@ -32,6 +52,9 @@ server.get('*', (req, res) => {
     {
       onAllReady() {
         res.setHeader('Content-type', 'text/html');
+
+        frame = frame.replace('%CSS_CHUNKS_PLACEHOLDER%', cssChunks.join('\n'));
+
         res.write(frame.replace('<div id="root"></div></body></html>', '<div id="root">'));
 
         stream.pipe(res, {end: false});
