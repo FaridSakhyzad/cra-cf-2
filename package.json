@@ -25,6 +25,7 @@
     "start-server": "npm run clean-build-folders && npm run build-client && npm run build-server && npm run run-server",
     "build-client": "npm run build",
     "build-server": "webpack --config ./webpack.server.js",
+    "build-generator": "webpack --config ./webpack.resourceServer.js",
     "run-server": "nodemon ./build-server/bundle.js",
     "clean-build-folders": "rm -rf ./build/ && rm -rf ./build-server/ && rm -rf ./dist/",
     "build": "react-scripts build",
