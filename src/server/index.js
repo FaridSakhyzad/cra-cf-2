@@ -8,6 +8,10 @@ import { StaticRouter } from 'react-router-dom/server';
 import App from '../App';
 import { reducer } from '../store';
 
+import dotenv from 'dotenv';
+
+dotenv.config({ path: '.env.production' });
+
 const PORT = process.env.PORT || 3024;
 
 const server = express();

@@ -11,6 +11,8 @@ const Home = React.lazy(() => import('./pages/Home' /* webpackPrefetch: true */)
 const Profile = React.lazy(() => import('./pages/Profile' /* webpackPrefetch: true */));
 const About = React.lazy(() => import('./pages/About' /* webpackPrefetch: true */));
 const Faq = React.lazy(() => import('./pages/Faq' /* webpackPrefetch: true */));
+const NotFound = React.lazy(() => import('./pages/404' /* webpackPrefetch: true */));
+const StatusReport = React.lazy(() => import('./pages/StatusReport' /* webpackPrefetch: true */));
 
 const store = configureStore({
   reducer,
@@ -33,9 +35,11 @@ function App() {
       <Suspense fallback={<div>Loading</div>}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/section=status_report" element={<StatusReport />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/about" element={<About />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Provider>
