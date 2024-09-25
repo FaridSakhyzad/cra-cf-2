@@ -29,7 +29,7 @@
     "build-server": "webpack --config ./webpack.server.js",
     "build-generator": "webpack --config ./webpack.resourceServer.js",
     "run-server": "node ./build/server.js",
-    "run-ssr-server": "nodemon ./build-server/ssr-bundle.js",
+    "run-ssr-server": "node ./build-server/ssr-bundle.js",
     "clean-build-folders": "rm -rf ./build/ && rm -rf ./build-server/ && rm -rf ./dist/",
     "build": "react-scripts build",
     "test": "react-scripts test",

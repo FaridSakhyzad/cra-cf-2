@@ -10,9 +10,12 @@ import { reducer } from '../store';
 
 import dotenv from 'dotenv';
 
-dotenv.config({ path: '.env.production' });
+dotenv.config({
+  path: ['.env', '.env.production', '.env.production.ssr'],
+  override: true
+});
 
-const PORT = process.env.PORT || 3024;
+const PORT = process.env.PORT || 3072;
 
 const server = express();
 
