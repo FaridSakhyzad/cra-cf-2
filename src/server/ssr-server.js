@@ -35,8 +35,6 @@ server.get('*', (req, res) => {
     cssChunks.push(template);
   }
 
-  let hasError = false;
-
   const store = configureStore({
     reducer,
   });
@@ -71,7 +69,6 @@ server.get('*', (req, res) => {
         res.end();
       },
       onError(error) {
-        hasError = true;
         console.error(error);
       }
     }

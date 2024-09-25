@@ -6,8 +6,6 @@ import { StaticRouter } from 'react-router-dom/server';
 
 const url = process.argv[2] || '/';
 
-console.log(process.argv);
-
 const renderReactAppToString = (jsx) => {
   return new Promise((resolve, reject) => {
     let html = '';
@@ -35,8 +33,8 @@ const jsx = <StaticRouter location={url}><App/></StaticRouter>;
 
 renderReactAppToString(jsx)
   .then(html => {
-    console.log(html); // Выводим рендеренное приложение как строку
+    console.log(html);
   })
   .catch(err => {
-    console.error('Ошибка SSR рендеринга:', err);
+    console.error('SSR Rendering Error:', err);
   });

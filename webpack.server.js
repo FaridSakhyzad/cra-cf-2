@@ -8,9 +8,9 @@ const InterpolateHtmlPlugin = require('interpolate-html-plugin');
 module.exports = {
   target: 'node',
   mode: 'production',
-  entry: './src/server/index.js',
+  entry: './src/server/ssr-server.js',
   output: {
-    filename: 'bundle.js',
+    filename: 'ssr-bundle.js',
     path: path.resolve(__dirname, 'build-server'),
     publicPath: '/'
   },
