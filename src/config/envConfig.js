@@ -1,6 +1,9 @@
 const getConfig = () => ({
   ROOT_ADMIN_URL: process.env.REACT_APP_ROOT_ADMIN_URL,
-  MY_TEST_VARIABLE: process.env.REACT_APP_MY_TEST_VARIABLE,
+  ENVIRONMENT: process.env.REACT_APP_ENVIRONMENT,
+  BACKEND_URL: process.env.REACT_APP_BACKEND_URL
 });
 
-exports.config = getConfig();
+const config = getConfig();
+
+export default config

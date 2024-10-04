@@ -2,7 +2,10 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 
-dotenv.config({ path: ['.env', '.env.production'], override: true });
+dotenv.config({
+  path: ['.env', '.env.production'],
+  override: true
+});
 
 const app = express();
 

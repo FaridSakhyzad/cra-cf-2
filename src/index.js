@@ -12,7 +12,7 @@ const domNode = document.getElementById('root');
 if (window.isServerRendered) {
   hydrateRoot(domNode, (
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.REACT_APP_BASE_NAME || ''}>
         <App />
       </BrowserRouter>
     </React.StrictMode>
@@ -21,7 +21,7 @@ if (window.isServerRendered) {
   const root = createRoot(domNode);
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.REACT_APP_BASE_NAME || ''}>
         <App />
       </BrowserRouter>
     </React.StrictMode>
