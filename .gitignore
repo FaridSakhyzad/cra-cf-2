@@ -30,3 +30,6 @@ yarn-error.log*
 /.idea
 /build/
 /build-server/
+/.env.development
+/.env.production
+/.env.production.ssr
