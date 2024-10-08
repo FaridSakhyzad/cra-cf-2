@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
 
 import config from '../../config/envConfig';
-import { verifyUser } from '../../api/auth';
+import { testEndpoint } from '../../api/auth';
 
 const { ROOT_ADMIN_URL, ENVIRONMENT, BACKEND_URL } = config;
 
 export default function StatusReport () {
   const restoreSession = async () => {
-    const result = await verifyUser();
+    const result = await testEndpoint();
 
     console.log('result', result);
   };
