@@ -18,7 +18,7 @@ export default function StatusReport () {
 
   return (
     <div>
-      <h1>STATUS REPORT</h1>
+      <h1>SAMPLE EDIT 1024</h1>
       <h2>process.env.ROOT_ADMIN_URL: {ROOT_ADMIN_URL}</h2>
       <h2>process.env.ENVIRONMENT: {ENVIRONMENT}</h2>
       <h2>process.env.BACKEND_URL: {BACKEND_URL}</h2>

@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-server": "npm run clean-build-folders && npm run build-client && npm run copy-server && npm run run-server",
+    "start-server": "npm run build-server && npm run run-server",
     "build-server": "npm run clean-build-folders && npm run build-client && npm run copy-server",
     "start-ssr-server": "npm run clean-build-folders && npm run build-client && npm run build-ssr-server && npm run run-ssr-server",
     "build-client": "npm run build",
